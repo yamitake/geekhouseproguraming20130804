@@ -18,16 +18,32 @@ public class HandJadge {
 
 	public static String besetHand(Hand hand){
 		
+		if(isFlush(hand) && isStraight(hand)){
+			return "straight flush";
+		}else if(getFourOfAKind(hand)){
+			return "four of a kind";
+		}else if(isFullHouse(hand)){
+			return "fullhouse";
+		}else if(isFlush(hand)){
+			return "flush";
+		}else if(isStraight(hand)){
+			return "straight";
+		}else if(false){//3card
+			return "three of a kind";
+		}else if(2 == getPairCount(hand)){
+			return "two pair";
+		}else if(1 == getPairCount(hand)){
+			return "one pair";
+		}
 		
-		return null;
+		return "high cards";
 	}
 	
-	public static String isFullHouse(Hand hand){
-		return null;
+	public static boolean isFullHouse(Hand hand){
+		return true;
 	}
 	
 	public static boolean getFourOfAKind(Hand hand){
-		
 		return false;
 	}
 	
@@ -40,8 +56,21 @@ public class HandJadge {
 	 * ƒyƒA”‚ğ•Ô‚·B
 	 */
 	public static int getPairCount(Hand hand){
+		int count = 0;
+		
 		List<Integer> numberList = hand.getNumberList();
-		return 0;
+		for(int i = 0; i < numberList.size(); i++){
+			int num = numberList.get(i);
+			for(int k = i; k < numberList.size(); k++){
+				if(i == k){
+					continue;
+				}
+				if(num == numberList.get(k)){
+					count++;
+				}
+			}
+		}
+		return count;
 	}
 	
 	/**
